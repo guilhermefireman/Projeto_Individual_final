@@ -1,15 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-  <title>Eventos</title>
+  <meta charset="UTF-8" />
+  <title>Eventos Sambapass</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #121212;
+      color: #eee;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    ul.event-list {
+      list-style: none;
+      padding: 0;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    ul.event-list li {
+      background: #222;
+      margin-bottom: 10px;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #f06292;
+      transition: box-shadow 0.3s;
+    }
+    ul.event-list li:hover {
+      box-shadow: 0 0 20px #ffb74d;
+    }
+    .event-name {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    .event-detail {
+      color: #bbb;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
-  <h1>Lista de Eventos</h1>
-  <ul>
-    <% eventos.forEach(evento => { %>
-      <li><strong><%= evento.nome %></strong> - <%= evento.data %></li>
-    <% }) %>
+  <h1>Eventos Sambapass</h1>
+  <ul class="event-list">
+    <% if (eventos && eventos.length > 0) { %>
+      <% eventos.forEach(evento => { %>
+        <li>
+          <div class="event-name"><%= evento.title %></div>
+          <div class="event-detail">
+            Local: <%= evento.location %><br>
+            Início: <%= new Date(evento.start_date).toLocaleString('pt-BR') %><br>
+            Fim: <%= new Date(evento.end_date).toLocaleString('pt-BR') %><br>
+            Descrição: <%= evento.description %>
+          </div>
+        </li>
+      <% }) %>
+    <% } else { %>
+      <li>Nenhum evento encontrado.</li>
+    <% } %>
   </ul>
-  <a href="/">Voltar</a>
 </body>
 </html>

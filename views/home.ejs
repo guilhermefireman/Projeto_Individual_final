@@ -1,10 +1,104 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
+  <meta charset="UTF-8">
   <title><%= titulo %></title>
+  <style>
+    body {
+      background-image: url('/samba_3d.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-attachment: fixed;
+      height: 100vh;
+      margin: 0;
+      color: white;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-shadow: 1px 1px 5px black;
+      background-color: #000;
+    }
+
+    h1.page-title {
+      font-size: 3rem;
+      font-weight: 700;
+      margin: 0 0 20px 0;
+      color: white;
+      text-align: center;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.9);
+    }
+
+    .slogan {
+      font-size: 2rem;
+      font-weight: 300;
+      text-align: center;
+      color: white;
+      animation: fadeIn 2s ease-in-out;
+      max-width: 90%;
+      line-height: 1.4;
+      margin-bottom: 40px;
+    }
+
+    .slogan .brand {
+      font-weight: 700;
+      color: #F06292; /* rosa premium visível no fundo escuro */
+    }
+
+    .slogan .highlight {
+      font-style: italic;
+      color: #FFB74D; /* laranja suave e elegante */
+    }
+
+    a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+      border: 2px solid white;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+
+    a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1.page-title {
+        font-size: 2rem;
+      }
+
+      .slogan {
+        font-size: 1.5rem;
+      }
+
+      a {
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1><%= titulo %></h1>
+  <h1 class="page-title"><%= titulo %></h1>
+
+  <div class="slogan">
+    <span class="brand">Sambapass</span> — Mais que um ingresso, <span class="highlight">uma experiência</span>.
+  </div>
+
   <a href="/eventos">Ver Eventos</a>
 </body>
 </html>
