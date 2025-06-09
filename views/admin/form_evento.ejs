@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title><%= evento ? 'Editar' : 'Novo' %> Evento</title>
+  <style>
+    body {
+      background: #121212;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 30px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    form {
+      max-width: 600px;
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      background: #222;
+      color: white;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 15px;
+      border: none;
+      background: #F06292;
+      color: white;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1><%= evento ? 'Editar' : 'Novo' %> Evento</h1>
+
+  <form method="POST" action="<%= evento ? '/admin/eventos/' + evento.id : '/admin/eventos' %>">
+    <label for="nome">Nome</label>
+    <input type="text" name="nome" value="<%= evento ? evento.nome : '' %>" required />
+
+    <label for="descricao">Descrição</label>
+    <textarea name="descricao" rows="4"><%= evento ? evento.descricao : '' %></textarea>
+
+    <label for="data">Data</label>
+    <input type="datetime-local" name="data" value="<%= evento ? new Date(evento.data).toISOString().slice(0,16) : '' %>" required />
+
+    <label for="local">Local</label>
+    <input type="text" name="local" value="<%= evento ? evento.local : '' %>" required />
+
+    <label for="cidade">Cidade</label>
+    <input type="text" name="cidade" value="<%= evento ? evento.cidade : '' %>" required />
+
+    <label for="imagem_url">URL da Imagem</label>
+    <input type="text" name="imagem_url" value="<%= evento ? evento.imagem_url : '' %>" />
+
+    <label for="whatsapp_link">Link do WhatsApp</label>
+    <input type="text" name="whatsapp_link" value="<%= evento ? evento.whatsapp_link : '' %>" />
+
+    <button type="submit">Salvar</button>
+  </form>
+</body>
+</html>

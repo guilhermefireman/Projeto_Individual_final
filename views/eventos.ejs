@@ -1,15 +1,97 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-  <title>Eventos</title>
+  <meta charset="UTF-8" />
+  <title>Eventos - SambaPass</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: #fff;
+      color: #111;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      text-align: center;
+      color: #2ecc71;
+    }
+
+    .event-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .event-card {
+      background-color: #f4f4f4;
+      border: 2px solid #2ecc71;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease;
+      text-align: center;
+    }
+
+    .event-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .event-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 4px solid #2ecc71;
+    }
+
+    .event-name {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #111;
+      margin-top: 15px;
+      text-decoration: none;
+      display: block;
+      padding: 0 10px;
+    }
+
+    .event-name:hover {
+      text-decoration: underline;
+    }
+
+    .event-date {
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 15px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Lista de Eventos</h1>
-  <ul>
-    <% eventos.forEach(evento => { %>
-      <li><strong><%= evento.nome %></strong> - <%= evento.data %></li>
-    <% }) %>
-  </ul>
-  <a href="/">Voltar</a>
+  <h1>Eventos <%= eventos.length && eventos[0].cidade ? 'em ' + eventos[0].cidade : '' %></h1>
+
+  <div class="event-grid">
+    <% if (eventos.length === 0) { %>
+      <p>Nenhum evento encontrado.</p>
+    <% } else { %>
+      <% eventos.forEach(evento => { %>
+        <div class="event-card">
+          <% if (evento.imagem_url) { %>
+            <img src="<%= evento.imagem_url %>" alt="Imagem do evento" class="event-image">
+          <% } %>
+          <a href="/evento/<%= evento.id %>" class="event-name"><%= evento.nome %></a>
+          <div class="event-date"><%= new Date(evento.data).toLocaleString('pt-BR') %></div>
+        </div>
+      <% }) %>
+    <% } %>
+  </div>
 </body>
 </html>
