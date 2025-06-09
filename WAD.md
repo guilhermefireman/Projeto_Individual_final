@@ -59,12 +59,23 @@ O banco de dados é hospedado no Supabase e contém duas tabelas principais:
 * **Model**: abstração via Supabase
 * **Controllers**: lógica das requisições
 * **Views**: templates EJS renderizados pelo servidor
+## Diagrama de Arquitetura MVC
+
+O projeto segue a arquitetura MVC (Model-View-Controller), conforme ilustrado abaixo:
+
+
+
+![Diagrama MVC](assets/arquitetura_MVC.png)
+
 
 ### Fluxo MVC:
 
 1. Rota é acessada
 2. Controller executa lógica com Supabase
 3. View EJS é renderizada com os dados recebidos
+
+
+
 
 ---
 
@@ -83,6 +94,15 @@ O banco de dados é hospedado no Supabase e contém duas tabelas principais:
 | POST   | /admin/eventos              | Criar novo evento          |
 | POST   | /admin/eventos/\:id         | Atualizar evento existente |
 | POST   | /admin/eventos/\:id/deletar | Excluir evento             |
+
+---
+
+## Acesso ao Painel de Administradores
+
+Para acessar o painel de administrador, utilize o seguinte login padrão:
+
+* **Email:** [teste@gmail.com](mailto:teste@gmail.com)
+* **Senha:** admin123
 
 ---
 
