@@ -80,10 +80,6 @@ Projeto_Individual/
 └── WAD.md
 ```
 
-## Contribuição
-
-Pull requests são bem-vindas para melhorias de design, funcionalidades ou refatoramento de código!
-
 ## Licença
 
 Este projeto é destinado a fins educacionais e demonstrativos. Todos os direitos reservados à equipe SambaPass.
