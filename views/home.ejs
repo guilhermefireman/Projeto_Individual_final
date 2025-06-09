@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title><%= titulo %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       background-image: url('/samba_3d.png');
@@ -10,85 +11,81 @@
       background-repeat: no-repeat;
       background-position: center;
       background-attachment: fixed;
-      height: 100vh;
       margin: 0;
       color: white;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
       text-shadow: 1px 1px 5px black;
       background-color: #000;
+      padding: 40px 20px;
     }
 
     h1.page-title {
       font-size: 3rem;
       font-weight: 700;
-      margin: 0 0 20px 0;
-      color: white;
+      margin-bottom: 10px;
       text-align: center;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.9);
     }
 
     .slogan {
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: 300;
       text-align: center;
-      color: white;
-      animation: fadeIn 2s ease-in-out;
-      max-width: 90%;
-      line-height: 1.4;
+      color: #ccc;
       margin-bottom: 40px;
     }
 
     .slogan .brand {
       font-weight: 700;
-      color: #F06292; /* rosa premium visível no fundo escuro */
+      color: #F06292;
     }
 
     .slogan .highlight {
       font-style: italic;
-      color: #FFB74D; /* laranja suave e elegante */
+      color: #FFB74D;
     }
 
-    a {
-      color: white;
+    .section-title {
+      font-size: 1.5rem;
+      margin: 40px 0 20px;
+      text-align: center;
+      border-bottom: 1px solid #333;
+      padding-bottom: 10px;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 20px;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .button {
+      padding: 0.8rem 1.2rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      text-align: center;
       text-decoration: none;
-      font-size: 1.2rem;
-      border: 2px solid white;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      transition: background-color 0.3s;
+      color: #fff;
+      font-weight: 500;
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
     }
 
-    a:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .button:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: scale(1.05);
     }
 
     @media (max-width: 600px) {
-      h1.page-title {
-        font-size: 2rem;
-      }
-
-      .slogan {
-        font-size: 1.5rem;
-      }
-
-      a {
-        font-size: 1rem;
-      }
+      h1.page-title { font-size: 2rem; }
+      .slogan { font-size: 1.1rem; }
     }
   </style>
 </head>
@@ -99,6 +96,20 @@
     <span class="brand">Sambapass</span> — Mais que um ingresso, <span class="highlight">uma experiência</span>.
   </div>
 
-  <a href="/eventos">Ver Eventos</a>
+  <!-- Seção: Cidades -->
+  <div class="section-title">Cidades</div>
+  <div class="grid">
+    <% cidades.forEach(cidade => { %>
+      <a href="/eventos/<%= cidade %>" class="button"><%= cidade %></a>
+    <% }) %>
+  </div>
+
+  <!-- Seção: Réveillons -->
+  <div class="section-title">Réveillons</div>
+  <div class="grid">
+    <% reveillons.forEach(reveillon => { %>
+      <a href="/eventos/<%= reveillon.cidade %>" class="button"><%= reveillon.nome %></a>
+    <% }) %>
+  </div>
 </body>
 </html>

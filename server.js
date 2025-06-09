@@ -1,32 +1,33 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const supabase = require('./config/database'); // Sua conexão Supabase aqui
+const session = require('express-session');
+const bodyParser = require('body-parser');
 
-// Configura o EJS como template engine
+const HomeController = require('./controllers/HomeController');
+const EventController = require('./controllers/EventController');
+const adminRoutes = require('./routes/adminRoutes');
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
-
-// Servir arquivos estáticos da pasta assets
 app.use(express.static(path.join(__dirname, 'assets')));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(session({
+  secret: 'sambaSegredo123',
+  resave: false,
+  saveUninitialized: false
+}));
 
-// Página inicial com título e slogan
-app.get('/', (req, res) => {
-  res.render('home', { titulo: 'BEM-VINDO, SAMBISTA!' });
-});
+// Rotas principais
+app.get('/', HomeController.index);
+app.get('/eventos', EventController.listarTodos);
+app.get('/eventos/:cidade', EventController.listarPorCidade);
+app.get('/evento/:id', EventController.verEvento);
 
-// Página de eventos com dados do Supabase
-app.get('/eventos', async (req, res) => {
-  try {
-    const { data: eventos, error } = await supabase.from('events').select('*');
-    if (error) throw error;
-    res.render('eventos', { eventos });
-  } catch (err) {
-    res.status(500).send('Erro ao carregar eventos: ' + err.message);
-  }
-});
+// ROTAS DO ADMIN (antes do listen)
+app.use('/admin', adminRoutes);
 
-// Inicia o servidor
+// Inicializa servidor
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
