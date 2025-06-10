@@ -3,7 +3,7 @@ const supabase = require('../config/database');
 module.exports = {
   index: async (req, res) => {
     try {
-      const cidades = ['Maceio', 'Recife', 'Sao Paulo'];
+      const cidades = ['Maceió - AL', 'Recife - PE', 'São Paulo - SP', 'Brasília - DF'];
 
       const { data: reveillons, error } = await supabase
         .from('events')
