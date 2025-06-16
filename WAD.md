@@ -2,52 +2,64 @@
 
 ## Nome do Projeto
 
-SambaPass - Plataforma de Ingressos via WhatsApp
+SambaPass – Plataforma web para exibição de eventos e venda de ingressos via WhatsApp
 
 ---
 
-## Descrição Técnica
+ ## Estrutura Técnica
 
-Este projeto consiste em um site completo com backend em Node.js, Express.js e EJS como engine de visualização. Utiliza Supabase para banco de dados (PostgreSQL) e autenticação. Permite:
+##### Backend: 
+* Node.js com Express.js
 
-* Listar eventos por cidade
-* Exibir uma página com detalhes individuais de cada evento
-* Painel administrativo com login protegido e gestão completa de eventos
+##### Frontend: 
+*EJS (Embedded JavaScript Templates)
+
+##### Banco de Dados: 
+* Supabase (PostgreSQL + Storage)
+
+##### Arquitetura: 
+* MVC (Model-View-Controller)
+---
+## Funcionalidades Implementadas
+
+* Listagem de cidades com eventos disponíveis
+
+* Visualização de eventos por cidade
+
+* Página individual do evento com imagem, descrição, data, local e botão de compra via WhatsApp
+
+##### Painel administrativo com:
+
+* Login de administrador com proteção de rotas
+
+* Dashboard com resumo de cidades e eventos
+
+* CRUD completo de eventos (criação, edição e exclusão)
+
+* Upload de imagem via URL manual (sem Cropper.js)
+
+* Estilização responsiva  com base em paleta verde escuro da marca
+---
+## Decisões Técnicas
+
+* Supabase escolhido pela facilidade de integração com Node.js e suporte a storage
+
+* Express + EJS por simplicidade na renderização do frontend server-side
+
+* Organização em MVC para separar responsabilidades e facilitar manutenção
+
 
 ---
 
-## Estrutura do Projeto
 
-```
-Projeto_Individual/
-├── assets/               # Imagens e arquivos estáticos
-├── config/               # Conexão com Supabase
-│   └── database.js
-├── controllers/
-│   ├── HomeController.js
-│   ├── EventController.js
-│   └── AdminController.js
-├── middlewares/
-│   └── authMiddleware.js
-├── routes/
-│   └── adminRoutes.js
-├── views/
-│   ├── home.ejs
-│   ├── eventos.ejs
-│   ├── eventos_indi.ejs
-│   └── admin/            # Views do painel admin
-├── .gitignore
-├── package.json
-├── server.js
-├── README.md
-└── WAD.md
-```
 
----
+
 
 ## Banco de Dados
 
 O banco de dados é hospedado no Supabase e contém duas tabelas principais:
+
+![Banco de Dados](assets/modelo-banco.png)
 
 * `admins`: email, name, password (hash)
 * `events`: id, nome, descricao, data, local, cidade, imagem\_url, whatsapp\_link
@@ -56,23 +68,33 @@ O banco de dados é hospedado no Supabase e contém duas tabelas principais:
 
 ## Arquitetura MVC
 
-* **Model**: abstração via Supabase
-* **Controllers**: lógica das requisições
-* **Views**: templates EJS renderizados pelo servidor
+* O projeto segue a arquitetura MVC (Model-View-Controller), separando de forma clara a lógica de negócio, apresentação e acesso a dados:
+
+*  Model: abstração do acesso aos dados, feita por meio do Supabase.
+
+* Controllers: camada responsável por lidar com as requisições HTTP, manipular os dados (via Supabase) e decidir qual view renderizar.
+
+* Views: páginas construídas com templates EJS, renderizadas no servidor com os dados dinâmicos.
+---
 ## Diagrama de Arquitetura MVC
 
 O projeto segue a arquitetura MVC (Model-View-Controller), conforme ilustrado abaixo:
 
 
 
-![Diagrama MVC](assets/arquitetura_MVC.png)
+![Diagrama MVC](assets/Arquitetura_MVC.png)
 
 
 ### Fluxo MVC:
 
-1. Rota é acessada
-2. Controller executa lógica com Supabase
-3. View EJS é renderizada com os dados recebidos
+1. O usuário acessa uma rota.
+
+2. A controller associada executa a lógica da aplicação.
+
+3. Os dados são buscados e manipulados via Supabase (model).
+
+4. A view EJS é renderizada com os dados e enviada como resposta.
+
 
 
 
@@ -81,19 +103,24 @@ O projeto segue a arquitetura MVC (Model-View-Controller), conforme ilustrado ab
 
 ## Endpoints Disponíveis
 
-| Método | Rota                        | Ação                       |
-| ------ | --------------------------- | -------------------------- |
-| GET    | /                           | Tela inicial               |
-| GET    | /eventos                    | Listar todos os eventos    |
-| GET    | /eventos/\:cidade           | Listar eventos por cidade  |
-| GET    | /evento/\:id                | Ver detalhes de um evento  |
-| GET    | /admin/login                | Tela de login admin        |
-| POST   | /admin/login                | Efetuar login admin        |
-| GET    | /admin/dashboard            | Painel com resumo          |
-| GET    | /admin/eventos              | Lista de eventos (admin)   |
-| POST   | /admin/eventos              | Criar novo evento          |
-| POST   | /admin/eventos/\:id         | Atualizar evento existente |
-| POST   | /admin/eventos/\:id/deletar | Excluir evento             |
+###  Rotas da Aplicação
+
+| Método | Rota                           | Ação                          |
+|--------|--------------------------------|-------------------------------|
+| GET    | `/`                            | Tela inicial (listar cidades) |
+| GET    | `/eventos`                     | Listar todos os eventos       |
+| GET    | `/eventos/:cidade`             | Listar eventos por cidade     |
+| GET    | `/evento/:id`                  | Ver detalhes de um evento     |
+| GET    | `/admin/login`                 | Tela de login do admin        |
+| POST   | `/admin/login`                 | Efetuar login do admin        |
+| GET    | `/admin/dashboard`             | Painel com resumo             |
+| GET    | `/admin/eventos`               | Lista de eventos (admin)      |
+| GET    | `/admin/eventos/novo`          | Formulário de novo evento     |
+| POST   | `/admin/eventos`               | Criar novo evento             |
+| GET    | `/admin/eventos/:id/editar`    | Formulário de edição de evento|
+| POST   | `/admin/eventos/:id`           | Atualizar evento existente    |
+| POST   | `/admin/eventos/:id/deletar`   | Excluir evento                |
+
 
 ---
 
@@ -134,6 +161,33 @@ $ node server.js
 # Acessar via navegador
 http://localhost:3000
 ```
+---
+## Principais Aprendizados e Desafios
+
+* Integração com Supabase e manipulação de imagens no backend
+
+* Implementação de autenticação protegida com express-session
+
+* Tratamento de erros e feedback visual para ações administrativas
+
+* Melhoria do design para responsividade e usabilidade com HTML e CSS puro
+---
+##  O que Funcionou Bem
+
+* Listagem e filtragem de eventos por cidade
+
+* Estrutura clara de rotas protegidas e públicas
+
+* CRUD de eventos funcional e intuitivo
+---
+## O que Pode Melhorar Futuramente
+
+* Substituir input manual de imagem por upload via arquivo
+
+* Melhorar feedback visual com loading states e mensagens de confirmação
+
+* Adicionar suporte a múltiplos administradores e níveis de permissão
+
 
 ---
 
