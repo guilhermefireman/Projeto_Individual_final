@@ -1,7 +1,6 @@
 # SambaPass
 
-SambaPass é uma plataforma moderna para divulgação de eventos e venda de ingressos por meio de um chatbot no WhatsApp. O sistema é dividido entre a experiência do público geral e um painel administrativo completo para gestão de eventos.
-
+Sambapass é uma fintech fundada em 2024, focada na divulgação de eventos e na venda de ingressos por meio de um chatbot no WhatsApp. A plataforma é composta por duas partes: uma experiência intuitiva para o público geral e um painel administrativo completo para a gestão eficiente de eventos.
 ## Visão Geral
 
 O site principal é focado em um layout elegante e responsivo, com destaque para as cidades onde os eventos acontecem e para os principais Réveillons. As compras são direcionadas para o WhatsApp da empresa.
