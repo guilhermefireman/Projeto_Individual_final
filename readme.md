@@ -39,7 +39,7 @@ O painel de administrador oferece funcionalidades completas de CRUD para eventos
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seuusuario/Projeto_Individual
+git clone https://github.com/seu_usuario/Projeto_Individual
 
 # Instale as dependências
 npm install
