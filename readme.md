@@ -32,7 +32,7 @@ O painel de administrador oferece funcionalidades completas de CRUD para eventos
 * Node.js + Express.js
 * Supabase (Banco de dados PostgreSQL + autenticação + Storage)
 * EJS (templates)
-* CSS puro (design responsivo)
+* HTML e CSS puro (design responsivo)
 * Express-session (autenticação)
 ---
 ## Como Executar o Projeto
