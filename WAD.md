@@ -149,8 +149,7 @@ Insira o hash gerado manualmente na tabela `admins` do Supabase.
 
 ```bash
 # Clonar o repositório
-$ git clone https://github.com/seuusuario/Projeto_Individual.git
-$ cd Projeto_Individual
+$ git clone https://github.com/seu_usuario/Projeto_Individual_final.git
 
 # Instalar dependências
 $ npm install
