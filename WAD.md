@@ -12,10 +12,10 @@ SambaPass – Plataforma web para exibição de eventos e venda de ingressos via
 * Node.js com Express.js
 
 ##### Frontend: 
-*EJS (Embedded JavaScript Templates)
+* EJS (Embedded JavaScript Templates)
 
 ##### Banco de Dados: 
-* Supabase (PostgreSQL + Storage)
+* Supabase (PostgreSQL + Storage + Autenticação)
 
 ##### Arquitetura: 
 * MVC (Model-View-Controller)
@@ -27,7 +27,7 @@ SambaPass – Plataforma web para exibição de eventos e venda de ingressos via
 * Visualização de eventos por cidade
 
 * Página individual do evento com imagem, descrição, data, local e botão de compra via WhatsApp
-
+* Categoria exclusiva para Réveillons
 ##### Painel administrativo com:
 
 * Login de administrador com proteção de rotas
@@ -120,7 +120,7 @@ O projeto segue a arquitetura MVC (Model-View-Controller), conforme ilustrado ab
 | GET    | `/admin/eventos/:id/editar`    | Formulário de edição de evento|
 | POST   | `/admin/eventos/:id`           | Atualizar evento existente    |
 | POST   | `/admin/eventos/:id/deletar`   | Excluir evento                |
-
+| GET    |`GET /admin/logout`   | ADM é deslogado automaticamente e redirecionado para o login.
 
 ---
 
@@ -169,11 +169,11 @@ http://localhost:3000
 
 * Tratamento de erros e feedback visual para ações administrativas
 
-* Melhoria do design para responsividade e usabilidade com HTML e CSS puro
+* Melhoria do design para responsividade e usabilidade com CSS puro
 ---
 ##  O que Funcionou Bem
 
-* Listagem e filtragem de eventos por cidade
+* Listagem e filtragem de eventos por cidade e também pela categoria Réveillon.
 
 * Estrutura clara de rotas protegidas e públicas
 
@@ -193,5 +193,5 @@ http://localhost:3000
 ## Considerações Finais
 
 * O projeto é modular e pode ser expandido com novos recursos
-* Pode ser adaptado para uso comercial ou institucional
+
 * Possui design moderno e responsivo inspirado em sites como Apple e Google

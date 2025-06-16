@@ -64,6 +64,34 @@ Copie o hash gerado e insira junto com nome e email no Supabase.
 
 ---
 ## Prints da Interface :
+![Tela inicio](assets/print_tela_inicial.png)
+
+##### 1. Imagem com mascote do SambaPass. Exibe botões para selecionar cidades e categorias de eventos como "Réveillons". É o ponto de entrada do site.
+
+![Listagem de Eventos por Cidade](assets/print_tela_eventos.png)
+
+##### 2. Página que mostra os eventos filtrados pela cidade escolhida. Cada card mostra nome, data, local e cidade do evento.
+
+![Página de Evento Individual ](assets/print_eventos_indi.png)
+##### 3. Mostra os detalhes completos de um evento: imagem grande, descrição, data, local, cidade e botão para compra de ingressos via WhatsApp.
+![Tela de Login Admin](assets/print_login.png)
+##### 4. Interface de login para administradores com design escuro e moderno. Campos de email e senha.
+
+![Erro de Login Admin](assets/print_login_incorreto.png)
+##### 5. Mensagem de erro "Senha incorreta" exibida quando as credenciais não conferem.
+![Dashboard Admin](assets/dashboard_adm.png)
+##### 6. Após login, mostra resumo do sistema: total de eventos e cidades cadastradas. Link para gerenciar eventos.
+![Listagem de Eventos Admin ](assets/Edição_de_Evento.png)
+##### 7. Admin visualiza todos os eventos cadastrados com opções para editar ou excluir. Botão para adicionar novo evento.
+![Edição de Evento](assets/Listagem_de_Eventos_Admin.png)
+##### 8. Formulário completo para editar dados do evento, incluindo nome, descrição, data, local, cidade, link da imagem e link do WhatsApp.
+
+--- 
+
+
+
+
+
 
 ## Licença
 
