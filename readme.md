@@ -53,7 +53,7 @@ http://localhost:3000
 ---
 ## Cadastro de Administrador
 
-A tabela `admins` deve ser preenchida manualmente no Supabase. Para gerar o hash da senha:
+A tabela `users` deve ser preenchida manualmente no Supabase. Para gerar o hash da senha:
 
 ```js
 const bcrypt = require('bcryptjs');

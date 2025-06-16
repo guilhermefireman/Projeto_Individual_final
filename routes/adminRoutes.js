@@ -17,5 +17,7 @@ router.post('/eventos', proteger, AdminController.criarEvento);
 router.get('/eventos/:id/editar', proteger, AdminController.formEditarEvento);
 router.post('/eventos/:id', proteger, AdminController.atualizarEvento);
 router.post('/eventos/:id/deletar', proteger, AdminController.deletarEvento);
+router.delete('/eventos/:id', proteger, AdminController.deletarEventoJson);
+
 
 module.exports = router;

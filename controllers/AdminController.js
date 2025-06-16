@@ -1,4 +1,5 @@
 const supabase = require('../config/database');
+const Event = require('../models/Event');
 
 // DASHBOARD
 exports.dashboard = async (req, res) => {
@@ -102,13 +103,12 @@ exports.atualizarEvento = async (req, res) => {
   }
 };
 
-// DELETAR EVENTO
+// DELETAR EVENTO (formulário tradicional)
 exports.deletarEvento = async (req, res) => {
   const { id } = req.params;
 
   try {
     const { error } = await supabase.from('events').delete().eq('id', id);
-
     if (error) throw error;
 
     res.redirect('/admin/eventos');
@@ -117,3 +117,14 @@ exports.deletarEvento = async (req, res) => {
   }
 };
 
+// DELETAR EVENTO (via fetch + JSON)
+exports.deletarEventoJson = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await Event.excluir(id);
+    res.json({ mensagem: 'Evento excluído com sucesso' });
+  } catch (err) {
+    res.status(500).json({ erro: 'Erro ao excluir evento: ' + err.message });
+  }
+};

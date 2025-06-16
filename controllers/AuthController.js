@@ -1,5 +1,6 @@
-const supabase = require('../config/database');
+// controllers/AuthController.js
 const bcrypt = require('bcrypt');
+const User = require('../models/User'); // Importa o model
 
 exports.formLogin = (req, res) => {
   res.render('admin/login');
@@ -8,29 +9,30 @@ exports.formLogin = (req, res) => {
 exports.login = async (req, res) => {
   const { email, password } = req.body;
 
-  const { data: user, error } = await supabase
-    .from('users')
-    .select('*')
-    .eq('email', email)
-    .single();
+  try {
+    const user = await User.buscarPorEmail(email);
 
-  if (error || !user) {
-    return res.render('admin/login', { error: 'Usuário não encontrado.' });
+    if (!user) {
+      return res.render('admin/login', { error: 'Usuário não encontrado.' });
+    }
+
+    const valid = await bcrypt.compare(password, user.password);
+
+    if (!valid) {
+      return res.render('admin/login', { error: 'Senha incorreta.' });
+    }
+
+    req.session.user = {
+      id: user.id,
+      name: user.name,
+      email: user.email
+    };
+
+    res.redirect('/admin/dashboard');
+  } catch (error) {
+    console.error('Erro no login:', error.message);
+    res.status(500).render('admin/login', { error: 'Erro ao tentar logar.' });
   }
-
-  const valid = await bcrypt.compare(password, user.password);
-
-  if (!valid) {
-    return res.render('admin/login', { error: 'Senha incorreta.' });
-  }
-
-  req.session.user = {
-    id: user.id,
-    name: user.name,
-    email: user.email
-  };
-
-  res.redirect('/admin/dashboard');
 };
 
 exports.logout = (req, res) => {

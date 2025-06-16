@@ -1,47 +1,33 @@
-const supabase = require('../config/database');
+// controllers/EventController.js
+const Event = require('../models/Event');
 
 module.exports = {
-  // Lista todos os eventos (para a página inicial ou geral)
+  // Lista todos os eventos
   listarTodos: async (req, res) => {
     try {
-      const { data: eventos, error } = await supabase.from('events').select('*');
-      if (error) throw error;
-
-      res.render('eventos', { eventos, cidade: null }); // cidade é null aqui
+      const eventos = await Event.buscarTodos();
+      res.render('eventos', { eventos, cidade: null });
     } catch (err) {
       res.status(500).send('Erro ao carregar eventos: ' + err.message);
     }
   },
 
-  // Lista eventos por cidade (ex: /eventos/sp)
+  // Lista eventos por cidade
   listarPorCidade: async (req, res) => {
     const { cidade } = req.params;
     try {
-      const { data: eventos, error } = await supabase
-        .from('events')
-        .select('*')
-        .eq('cidade', cidade);
-
-      if (error) throw error;
-
-      res.render('eventos', { eventos, cidade }); // <-- cidade passada corretamente
+      const eventos = await Event.buscarPorCidade(cidade);
+      res.render('eventos', { eventos, cidade });
     } catch (err) {
       res.status(500).send('Erro ao carregar eventos da cidade: ' + err.message);
     }
   },
 
-  // Exibe um evento individual
+  // Exibe evento individual
   verEvento: async (req, res) => {
     const { id } = req.params;
     try {
-      const { data: evento, error } = await supabase
-        .from('events')
-        .select('*')
-        .eq('id', id)
-        .single();
-
-      if (error || !evento) throw error || new Error("Evento não encontrado");
-
+      const evento = await Event.buscarPorId(id);
       res.render('eventos_indi', { evento });
     } catch (err) {
       res.status(500).send('Erro ao carregar o evento: ' + err.message);

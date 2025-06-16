@@ -43,10 +43,6 @@
       background: #333;
     }
 
-    .actions form {
-      display: inline;
-    }
-
     .actions button {
       background: #ff5252;
       color: white;
@@ -86,9 +82,7 @@
             <td><%= new Date(evento.data).toLocaleDateString('pt-BR') %></td>
             <td class="actions">
               <a href="/admin/eventos/<%= evento.id %>/editar">Editar</a>
-              <form method="POST" action="/admin/eventos/<%= evento.id %>/deletar">
-                <button type="submit">Excluir</button>
-              </form>
+              <button onclick="deletarEventoFetch('<%= evento.id %>')">Excluir</button>
             </td>
           </tr>
         <% }) %>
@@ -97,5 +91,28 @@
       <% } %>
     </tbody>
   </table>
+
+  <script>
+    async function deletarEventoFetch(id) {
+      if (!confirm("Tem certeza que deseja excluir este evento?")) return;
+
+      try {
+        const resposta = await fetch(`/admin/eventos/${id}`, {
+          method: 'DELETE'
+        });
+
+        const resultado = await resposta.json();
+
+        if (resposta.ok) {
+          alert('Evento excluído com sucesso!');
+          location.reload();
+        } else {
+          alert(resultado.erro || 'Erro ao excluir.');
+        }
+      } catch (err) {
+        alert('Erro inesperado: ' + err.message);
+      }
+    }
+  </script>
 </body>
 </html>

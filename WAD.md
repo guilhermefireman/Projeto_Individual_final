@@ -61,9 +61,57 @@ O banco de dados é hospedado no Supabase e contém duas tabelas principais:
 
 ![Banco de Dados](assets/modelo-banco.png)
 
-* `admins`: email, name, password (hash)
+* `users`: email, name, password (hash)
 * `events`: id, nome, descricao, data, local, cidade, imagem\_url, whatsapp\_link
 
+#### Modelo Físico
+
+O modelo físico do banco de dados é implementado diretamente no Supabase, utilizando duas tabelas principais: admins e events.
+
+##### Abaixo está o script SQL de criação:
+```sql
+-- USERS
+CREATE TABLE users (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- EVENTS
+CREATE TABLE events (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  nome TEXT NOT NULL,
+  descricao TEXT,
+  data TIMESTAMP WITH TIME ZONE,
+  local TEXT,
+  cidade TEXT,
+  imagem_url TEXT,
+  whatsapp_link TEXT
+);
+```
+
+#### Cada tabela contém os seguintes campos:
+
+ ```
+ users
+id: Identificador único (BIGINT, PK)
+name: Nome do administrador (TEXT)
+email: E-mail único (TEXT)
+password: Senha criptografada (TEXT)
+created_at: Data de criação automática (TIMESTAMP)
+
+events
+id: Identificador único (UUID, PK)
+nome: Nome do evento (TEXT)
+descricao: Descrição completa do evento (TEXT)
+data: Data e hora do evento (TIMESTAMP WITH TIME ZONE)
+local: Local onde ocorrerá (TEXT)
+cidade: Cidade do evento (TEXT)
+imagem_url: URL da imagem no Supabase Storage (TEXT)
+whatsapp_link: Link para redirecionar compra no WhatsApp (TEXT)
+```
 ---
 
 ## Arquitetura MVC
@@ -141,7 +189,7 @@ const senha = 'admin123';
 bcrypt.hash(senha, 10).then(hash => console.log(hash));
 ```
 
-Insira o hash gerado manualmente na tabela `admins` do Supabase.
+Insira o hash gerado manualmente na tabela `users` do Supabase.
 
 ---
 
