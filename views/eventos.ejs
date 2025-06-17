@@ -11,22 +11,11 @@
   </header>
 
   <main class="container">
-    <div class="cards">
-      <% eventos.forEach(evento => { %>
-        <a href="/evento/<%= evento.id %>" class="card-link">
-          <div class="card">
-            <img src="<%= evento.imagem_url %>" alt="<%= evento.nome %>">
-            <div class="card-content">
-              <h3><%= evento.nome %></h3>
-              <p><strong>Data:</strong> <%= new Date(evento.data).toLocaleDateString('pt-BR') %></p>
-              <p><strong>Local:</strong> <%= evento.local %></p>
-              <p><strong>Cidade:</strong> <%= evento.cidade %></p>
-          
-            </div>
-          </div>
-        </a>
-      <% }) %>
-    </div>
+    <!-- Substituí o EJS por uma div onde o JS vai inserir os eventos -->
+    <div id="eventos" class="cards"></div>
   </main>
+
+  <!-- Script que busca e exibe os eventos automaticamente -->
+  <script src="/js/main.js"></script>
 </body>
 </html>
