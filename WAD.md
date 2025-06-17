@@ -23,6 +23,7 @@ SambaPass – Plataforma web para exibição de eventos e venda de ingressos via
 ## Funcionalidades Implementadas
 
 * Listagem de cidades com eventos disponíveis
+* Integração frontend-backend com Fetch API: a exclusão de eventos no painel admin utiliza JavaScript assíncrono com `fetch()` para enviar requisições `DELETE`, receber respostas em JSON e atualizar a interface sem recarregamento.
 
 * Visualização de eventos por cidade
 
@@ -38,7 +39,8 @@ SambaPass – Plataforma web para exibição de eventos e venda de ingressos via
 
 * Upload de imagem via URL manual (sem Cropper.js)
 
-* Estilização responsiva  com base em paleta verde escuro da marca
+* Estilização responsiva com base em paleta verde escuro da marca e CSS externo modularizado (cada view tem seu próprio arquivo `.css` em `/public/css/`)
+
 ---
 ## Decisões Técnicas
 
@@ -168,6 +170,7 @@ O projeto segue a arquitetura MVC (Model-View-Controller), conforme ilustrado ab
 | GET    | `/admin/eventos/:id/editar`    | Formulário de edição de evento|
 | POST   | `/admin/eventos/:id`           | Atualizar evento existente    |
 | POST   | `/admin/eventos/:id/deletar`   | Excluir evento                |
+| DELETE | `/admin/eventos/:id`   | Excluir evento via integração Fetch API | evento               
 | GET    |`GET /admin/logout`   | ADM é deslogado automaticamente e redirecionado para o login.
 
 ---
@@ -227,6 +230,14 @@ http://localhost:3000
 
 * CRUD de eventos funcional e intuitivo
 ---
+## Melhorias Recentes Aplicadas
+
+* Separação de estilos CSS em arquivos externos
+* Integração front-back com JavaScript assíncrono (`fetch`)
+* Uso da camada `models/` para abstração de acesso ao Supabase
+
+--- 
+
 ## O que Pode Melhorar Futuramente
 
 * Substituir input manual de imagem por upload via arquivo

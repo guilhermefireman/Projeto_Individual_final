@@ -1,5 +1,4 @@
 const container = document.getElementById('eventos');
-const botaoAtualizar = document.getElementById('atualizar');
 
 async function carregarEventos() {
   container.innerHTML = '<p>Carregando eventos...</p>';
@@ -33,6 +32,3 @@ async function carregarEventos() {
 
 // Carrega eventos ao abrir a página
 document.addEventListener('DOMContentLoaded', carregarEventos);
-
-// Atualiza eventos ao clicar no botão
-botaoAtualizar.addEventListener('click', carregarEventos);
