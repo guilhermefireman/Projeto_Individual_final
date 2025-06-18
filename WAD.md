@@ -284,18 +284,14 @@ PROJETO_INDIVIDUAL/
 │   │   ├── form_evento.css
 │   │   ├── home.css
 │   │   ├── login.css
-│   │   └── style.css
+│   │   
 │   └── js/
 │       └── main.js         # JS frontend para carregamento dinâmico dos eventos
 ├── routes/                 # Arquivos de rotas (Express Router)
 │   ├── adminRoutes.js
 │   └── index.js
-├── scripts/                # (Reservado para scripts adicionais, opcional)
 ├── services/               # Lógica de serviço para manipulação de dados
-│   └── eventService.js
-├── styles/                 # (Antiga pasta de CSS, agora substituída por /public/css)
-├── tests/                  # Arquivos de testes (Jest ou outro)
-│   └── example.test.js
+│   └── eventService.j
 ├── utils/                  # Funções utilitárias como gerar hash
 │   └── gerarHash.js
 ├── views/                  # Templates EJS (Views do MVC)
@@ -307,8 +303,7 @@ PROJETO_INDIVIDUAL/
 │   ├── eventos.ejs
 │   ├── eventos_indi.ejs
 │   └── home.ejs
-├── .env                    # Variáveis de ambiente (não enviado para o Git)
-├── .env.example            # Exemplo de configuração do .env
+├── .env                    # Variáveis de ambiente 
 ├── .gitignore              # Arquivos a ignorar no Git
 ├── package.json
 ├── package-lock.json
