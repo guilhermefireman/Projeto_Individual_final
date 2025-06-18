@@ -63,7 +63,7 @@ O banco de dados é hospedado no Supabase e contém duas tabelas principais:
 
 * `users`: email, name, password (hash)
 * `events`: id, nome, descricao, data, local, cidade, imagem\_url, whatsapp\_link
-
+---
 #### Modelo Físico
 
 O modelo físico do banco de dados é implementado diretamente no Supabase, utilizando duas tabelas principais: admins e events.
