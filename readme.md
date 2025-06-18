@@ -18,6 +18,7 @@ O painel de administrador oferece funcionalidades completas de CRUD para eventos
 * Tela inicial com lista de cidades e categoria especial para Réveillons
 * Listagem de eventos filtrada por cidade
 * Página individual de cada evento com imagem, data, local e botão de compra via WhatsApp
+* Carregamento dinâmico dos eventos via JavaScript com Fetch API (`/events?cidade=...`)
 
 ### Administrador
 
@@ -26,14 +27,23 @@ O painel de administrador oferece funcionalidades completas de CRUD para eventos
 * CRUD completo de eventos (criar, editar, excluir)
 * Upload de imagem via URL
 * Botão de logout
+* Exclusão de eventos com integração via Fetch API (requisição assíncrona com resposta JSON)
+
 ---
 ## Tecnologias Utilizadas
 
 * Node.js + Express.js
+
 * Supabase (Banco de dados PostgreSQL + autenticação + Storage)
+
 * EJS (templates)
-* HTML e CSS puro (design responsivo)
+
+* HTML e CSS puro (design responsivo com CSS externo modularizado por view)
+
 * Express-session (autenticação)
+
+* Arquitetura MVC aplicada com uso real de models (`models/`) para abstrair acesso ao banco de dados
+
 ---
 ## Como Executar o Projeto
 
@@ -87,11 +97,6 @@ Copie o hash gerado e insira junto com nome e email no Supabase.
 ##### 8. Formulário completo para editar dados do evento, incluindo nome, descrição, data, local, cidade, link da imagem e link do WhatsApp.
 
 --- 
-
-
-
-
-
 
 ## Licença
 

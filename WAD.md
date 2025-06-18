@@ -23,6 +23,10 @@ SambaPass – Plataforma web para exibição de eventos e venda de ingressos via
 ## Funcionalidades Implementadas
 
 * Listagem de cidades com eventos disponíveis
+* Integração frontend-backend com Fetch API:
+  * Exclusão de eventos no painel admin utilizando `fetch()` + método `DELETE`
+  * Carregamento dinâmico dos eventos na tela `/eventos/:cidade`, com suporte a filtros via query string (`?cidade=sp`, `?cidade=reveillon`)
+
 
 * Visualização de eventos por cidade
 
@@ -38,7 +42,8 @@ SambaPass – Plataforma web para exibição de eventos e venda de ingressos via
 
 * Upload de imagem via URL manual (sem Cropper.js)
 
-* Estilização responsiva  com base em paleta verde escuro da marca
+* Estilização responsiva com base em paleta verde escuro da marca e CSS externo modularizado (cada view tem seu próprio arquivo `.css` em `/public/css/`)
+
 ---
 ## Decisões Técnicas
 
@@ -59,7 +64,7 @@ SambaPass – Plataforma web para exibição de eventos e venda de ingressos via
 
 O banco de dados é hospedado no Supabase e contém duas tabelas principais:
 
-![Banco de Dados](assets/modelo-banco.png)
+![Banco de dados](assets/modelo-banco.png)
 
 * `users`: email, name, password (hash)
 * `events`: id, nome, descricao, data, local, cidade, imagem\_url, whatsapp\_link
@@ -151,24 +156,25 @@ O projeto segue a arquitetura MVC (Model-View-Controller), conforme ilustrado ab
 
 ## Endpoints Disponíveis
 
-###  Rotas da Aplicação
+### Rotas da Aplicação
 
-| Método | Rota                           | Ação                          |
-|--------|--------------------------------|-------------------------------|
-| GET    | `/`                            | Tela inicial (listar cidades) |
-| GET    | `/eventos`                     | Listar todos os eventos       |
-| GET    | `/eventos/:cidade`             | Listar eventos por cidade     |
-| GET    | `/evento/:id`                  | Ver detalhes de um evento     |
-| GET    | `/admin/login`                 | Tela de login do admin        |
-| POST   | `/admin/login`                 | Efetuar login do admin        |
-| GET    | `/admin/dashboard`             | Painel com resumo             |
-| GET    | `/admin/eventos`               | Lista de eventos (admin)      |
-| GET    | `/admin/eventos/novo`          | Formulário de novo evento     |
-| POST   | `/admin/eventos`               | Criar novo evento             |
-| GET    | `/admin/eventos/:id/editar`    | Formulário de edição de evento|
-| POST   | `/admin/eventos/:id`           | Atualizar evento existente    |
-| POST   | `/admin/eventos/:id/deletar`   | Excluir evento                |
-| GET    |`GET /admin/logout`   | ADM é deslogado automaticamente e redirecionado para o login.
+| Método | Rota                            | Ação                                                                 |
+|--------|---------------------------------|----------------------------------------------------------------------|
+| GET    | `/`                             | Tela inicial (listar cidades e destaques de Réveillon)              |
+| GET    | `/eventos`                      | Listar todos os eventos (sem filtro)                                |
+| GET    | `/eventos/:cidade`              | Listar eventos por cidade ou categoria (ex: /eventos/reveillon)     |
+| GET    | `/evento/:id`                   | Ver detalhes de um evento individual                                |
+| GET    | `/admin/login`                  | Tela de login do administrador                                      |
+| POST   | `/admin/login`                  | Efetuar login                                                       |
+| GET    | `/admin/dashboard`              | Painel de resumo geral (eventos e cidades)                          |
+| GET    | `/admin/eventos`                | Listar eventos cadastrados (modo admin)                             |
+| GET    | `/admin/eventos/novo`           | Formulário para cadastrar novo evento                               |
+| POST   | `/admin/eventos`                | Criar novo evento                                                   |
+| GET    | `/admin/eventos/:id/editar`     | Formulário de edição de evento                                      |
+| POST   | `/admin/eventos/:id`            | Atualizar dados de um evento existente                              |
+| POST   | `/admin/eventos/:id/deletar`    | Excluir evento via formulário tradicional                           |
+| DELETE | `/admin/eventos/:id`            | Excluir evento via integração Fetch API (JSON)                      |
+| GET    | `/admin/logout`                 | Logout do admin e redirecionamento para tela de login               |
 
 ---
 
@@ -227,6 +233,14 @@ http://localhost:3000
 
 * CRUD de eventos funcional e intuitivo
 ---
+## Melhorias Recentes Aplicadas
+
+* Separação de estilos CSS em arquivos externos
+* Integração front-back com JavaScript assíncrono (`fetch`)
+* Uso da camada `models/` para abstração de acesso ao Supabase
+
+--- 
+
 ## O que Pode Melhorar Futuramente
 
 * Substituir input manual de imagem por upload via arquivo
@@ -243,3 +257,61 @@ http://localhost:3000
 * O projeto é modular e pode ser expandido com novos recursos
 
 * Possui design moderno e responsivo inspirado em sites como Apple e Google
+---
+
+## Estrutura de Pastas do Projeto
+
+PROJETO_INDIVIDUAL/
+├── assets/                  # Imagens e diagramas usados na documentação
+├── config/                  # Configuração de acesso ao Supabase
+│   └── database.js
+├── controllers/             # Camada de controle (Controllers do MVC)
+│   ├── AdminController.js
+│   ├── AuthController.js
+│   ├── EventController.js
+│   └── HomeController.js
+├── middlewares/            # Middlewares como autenticação
+│   └── authMiddleware.js
+├── models/                 # Modelos que abstraem o Supabase (Model do MVC)
+│   ├── Event.js
+│   └── User.js
+├── public/                 # Arquivos estáticos servidos ao navegador
+│   ├── css/                # CSS externo por view
+│   │   ├── admin.css
+│   │   ├── dashboard.css
+│   │   ├── eventos.css
+│   │   ├── eventos_indi.css
+│   │   ├── form_evento.css
+│   │   ├── home.css
+│   │   ├── login.css
+│   │   └── style.css
+│   └── js/
+│       └── main.js         # JS frontend para carregamento dinâmico dos eventos
+├── routes/                 # Arquivos de rotas (Express Router)
+│   ├── adminRoutes.js
+│   └── index.js
+├── scripts/                # (Reservado para scripts adicionais, opcional)
+├── services/               # Lógica de serviço para manipulação de dados
+│   └── eventService.js
+├── styles/                 # (Antiga pasta de CSS, agora substituída por /public/css)
+├── tests/                  # Arquivos de testes (Jest ou outro)
+│   └── example.test.js
+├── utils/                  # Funções utilitárias como gerar hash
+│   └── gerarHash.js
+├── views/                  # Templates EJS (Views do MVC)
+│   ├── admin/
+│   │   ├── dashboard.ejs
+│   │   ├── form_evento.ejs
+│   │   ├── gerenciar_eventos.ejs
+│   │   └── login.ejs
+│   ├── eventos.ejs
+│   ├── eventos_indi.ejs
+│   └── home.ejs
+├── .env                    # Variáveis de ambiente (não enviado para o Git)
+├── .env.example            # Exemplo de configuração do .env
+├── .gitignore              # Arquivos a ignorar no Git
+├── package.json
+├── package-lock.json
+├── server.js               # Arquivo principal da aplicação
+├── README.md
+└── WAD.md

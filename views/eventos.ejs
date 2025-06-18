@@ -3,106 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Eventos<%= cidade ? ' em ' + cidade.charAt(0).toUpperCase() + cidade.slice(1) : '' %></title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Arial', sans-serif;
-      background-color: #f4f4f4;
-      color: #222;
-    }
-
-    header {
-      background-color: #0a3d2e;
-      padding: 40px 20px;
-      text-align: center;
-      color: white;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 32px;
-      letter-spacing: 1px;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-
-    .cards {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      justify-content: center;
-    }
-
-    .card-link {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .card {
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      overflow: hidden;
-      width: 280px;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-    }
-
-    .card img {
-      width: 100%;
-      height: 180px;
-      object-fit: contain;
-      background: #f0f0f0;
-    }
-
-    .card-content {
-      padding: 16px;
-    }
-
-    .card-content h3 {
-      margin: 0 0 10px;
-      font-size: 20px;
-      color: #0a3d2e;
-    }
-
-    .card-content p {
-      margin: 4px 0;
-      font-size: 14px;
-    }
-
-    .whatsapp {
-      margin-top: 12px;
-      display: inline-block;
-      color: #0a3d2e;
-      text-decoration: none;
-      font-weight: bold;
-      border: 1px solid #0a3d2e;
-      padding: 6px 12px;
-      border-radius: 8px;
-      transition: 0.2s ease;
-    }
-
-    .whatsapp:hover {
-      background-color: #0a3d2e;
-      color: white;
-    }
-
-    @media (max-width: 600px) {
-      .cards {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="/css/eventos.css" />
 </head>
 <body>
   <header>
@@ -110,22 +11,11 @@
   </header>
 
   <main class="container">
-    <div class="cards">
-      <% eventos.forEach(evento => { %>
-        <a href="/evento/<%= evento.id %>" class="card-link">
-          <div class="card">
-            <img src="<%= evento.imagem_url %>" alt="<%= evento.nome %>">
-            <div class="card-content">
-              <h3><%= evento.nome %></h3>
-              <p><strong>Data:</strong> <%= new Date(evento.data).toLocaleDateString('pt-BR') %></p>
-              <p><strong>Local:</strong> <%= evento.local %></p>
-              <p><strong>Cidade:</strong> <%= evento.cidade %></p>
-          
-            </div>
-          </div>
-        </a>
-      <% }) %>
-    </div>
+    <!-- Substituí o EJS por uma div onde o JS vai inserir os eventos -->
+    <div id="eventos" class="cards"></div>
   </main>
+
+  <!-- Script que busca e exibe os eventos automaticamente -->
+  <script src="/js/main.js"></script>
 </body>
 </html>
