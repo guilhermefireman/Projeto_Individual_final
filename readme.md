@@ -95,6 +95,11 @@ Copie o hash gerado e insira junto com nome e email no Supabase.
 ##### 7. Admin visualiza todos os eventos cadastrados com opções para editar ou excluir. Botão para adicionar novo evento.
 ![Edição de Evento](assets/Listagem_de_Eventos_Admin.png)
 ##### 8. Formulário completo para editar dados do evento, incluindo nome, descrição, data, local, cidade, link da imagem e link do WhatsApp.
+---
+##  Vídeo de Apresentação
+
+Demonstração completa do projeto:   
+[🔗 Ver no Google Drive](https://drive.google.com/file/d/1qIMh4PQUy68YX36x9mHAMlFtkAQy45dn/view?usp=sharing)
 
 --- 
 
