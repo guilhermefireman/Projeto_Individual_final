@@ -80,7 +80,7 @@ Copie o hash gerado e insira junto com nome e email no Supabase.
 
 ![Listagem de Eventos por Cidade](assets/print_tela_eventos.png)
 
-##### 2. Página que mostra os eventos filtrados pela cidade escolhida. Cada card mostra nome, data, local e cidade do evento.
+##### 2. Página que exibe os eventos filtrados pela cidade selecionada ou pela categoria "Réveillon". Cada card apresenta o nome, data, local e cidade do evento.
 
 ![Página de Evento Individual ](assets/print_eventos_indi.png)
 ##### 3. Mostra os detalhes completos de um evento: imagem grande, descrição, data, local, cidade e botão para compra de ingressos via WhatsApp.
@@ -95,6 +95,9 @@ Copie o hash gerado e insira junto com nome e email no Supabase.
 ##### 7. Admin visualiza todos os eventos cadastrados com opções para editar ou excluir. Botão para adicionar novo evento.
 ![Edição de Evento](assets/Listagem_de_Eventos_Admin.png)
 ##### 8. Formulário completo para editar dados do evento, incluindo nome, descrição, data, local, cidade, link da imagem e link do WhatsApp.
+![Adicionar Novo Evento](assets/print_novo_evento.png)
+##### 9. Página de cadastro de novo evento, com formulário para inserir nome, descrição, data, local, cidade, imagem e link do WhatsApp. Disponível apenas para administradores autenticados.
+
 ---
 ##  Vídeo de Apresentação
 
